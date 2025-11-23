@@ -136,7 +136,22 @@ public:
             cout << src << " -> " << i << " : " << dist[i] << endl;
     }
     void MST(){
-        
+        vector<int> key(SIZE, max); 
+        vector<bool> included(SIZE, false); //this is to keep track of the vertix that is in the MST
+        vector<int> parent(SIZE, -1); //This vector is created to store the minimum spanning tree under parent
+        key(0) = 0;
+
+        for (int i=0, i<SIZE, i++){
+            int a = -1;
+            for (int j= 0; j<SIZE; j++){
+                if(included[j] && (u==-1 || key[j] <key[u])){ //if the vertex is not in the span, and it's key is smaller, the u will be changed to j
+                    u=j;
+                }
+            }
+            included[u] = true;
+
+            for (auto &edge)
+        }
     }
 };
 
