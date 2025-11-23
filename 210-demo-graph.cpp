@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+//I decided that I wanted to create an emergency exit for a building with 12 floors
 
 const int SIZE = 13;
 
