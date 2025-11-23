@@ -15,6 +15,9 @@ class Graph {
 public:
     // a vector of vectors of Pairs to represent an adjacency list
     vector<vector<Pair>> adjList;
+    vector<string> floorNames = {
+        "Floor 0", "Floor 1", "Floor 2", "Floor 3", "Floor 4", "Floor 5", "Floor 6", "Floor 7", "Floor 8", "Floor 9", "Floor 10", "Floor 11", "Floor 12 "
+    };
 
     // Graph Constructor
     Graph(vector<Edge> const &edges) {
@@ -38,9 +41,11 @@ public:
     void printGraph() {
         cout << "Graph's adjacency list:" << endl;
         for (int i = 0; i < adjList.size(); i++) {
-            cout << i << " --> ";
-            for (Pair v : adjList[i])
-                cout << "(" << v.first << ", " << v.second << ") ";
+            cout << floorNames[i] << " connects to:\n";
+
+            for (auto &p : adjList[i]) {
+                cout << "  ->" << floorNames[p.first] << " | Stair Difficulty: " << p.second << endl;
+            }//the weights became the difficulty, and the vertex are the floors
             cout << endl;
         }
     }
@@ -66,7 +71,7 @@ public:
         visited[b] = true; //after going through each of the vertex, it is marked true so that you won't repeat the visit
         v.push_back(b);
         while (!v.empty()) {
-            int l = b.front();
+            int l = v.front();
             v.erase(v.begin());
             cout << l << " ";
             for (auto &edge : adjList[l]) {
@@ -87,7 +92,7 @@ int main() {
         //vertex 0
         {0,1,12},{0,2,8},{0,3,21},
         //vertex 1
-        {1,7,2}
+        {1,7,2},
         //vertex 2
         {2,3,6},{2,6,2},
         //vertex 4
@@ -114,6 +119,7 @@ int main() {
     graph.printGraph();
     //both of these are going to start from vertex 0
     graph.DFS(0);
+    cout << endl;
     graph.BFS(0);
 
     return 0;
