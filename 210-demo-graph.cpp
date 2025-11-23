@@ -136,15 +136,15 @@ public:
             cout << src << " -> " << i << " : " << dist[i] << endl;
     }
     void MST(){
-        vector<int> key(SIZE, max); 
+        vector<int> key(SIZE, INT_MAX); 
         vector<bool> included(SIZE, false); //this is to keep track of the vertix that is in the MST
         vector<int> parent(SIZE, -1); //This vector is created to store the minimum spanning tree under parent
-        key(0) = 0;
+        key[0] = 0;
 
         for (int i=0; i<SIZE-1; i++){
             int u = -1;
             for (int j= 0; j<SIZE; j++){
-                if(included[j] && (u==-1 || key[j] <key[u])){ //if the vertex is not in the span, and it's key is smaller, the u will be changed to j
+                if(!included[j] && (u==-1 || key[j] <key[u])){ //if the vertex is not in the span, and it's key is smaller, the u will be changed to j
                     u=j;
                 }
             }
@@ -154,7 +154,7 @@ public:
                 int v = edge.first;
                 int weight = edge.second;
 
-                if (!inMST[v] && weight < key[v]) { //if thee vertex is not yet in the span and it's weight is also less, parent and v is updated
+                if (!included[v] && weight < key[v]) { //if thee vertex is not yet in the span and it's weight is also less, parent and v is updated
                     parent[v] = u;
                     key[v] = weight;
                 }
@@ -162,7 +162,7 @@ public:
         }
         for (int i = 0; i <SIZE ; i++){
             if (parent[i] != -1){
-                cout << "Intersection from" << parent [i] << " to " << i<< "fits " << key[i] << " people" << endl;
+                cout << "Intersection from " << parent [i] << " to " << i<< " fits " << key[i] << " people." << endl;
             }
         }
 
