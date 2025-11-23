@@ -213,6 +213,15 @@ int main() {
     graph.shortest(0);
 
     graph.MST();
+    int choice;
+    cout << "[0] Show the full map of the building" << endl;
+    cout << "[1] Show the neighboring floors (BFS)" << endl;
+    cout << "[2] Show any paths from the intersections (DFS)" << endl;
+    cout << "[3] Show the shortest paths" << endl;
+    cout << "[4] Show minimum spanning tree" << endl;
+    cout << "[5] Quit" << endl;
+    cout << "Enter your choice: ";
+    cin >> choice;
 
     return 0;
 }
