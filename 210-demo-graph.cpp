@@ -141,8 +141,8 @@ public:
         vector<int> parent(SIZE, -1); //This vector is created to store the minimum spanning tree under parent
         key(0) = 0;
 
-        for (int i=0, i<SIZE, i++){
-            int a = -1;
+        for (int i=0; i<SIZE-1; i++){
+            int u = -1;
             for (int j= 0; j<SIZE; j++){
                 if(included[j] && (u==-1 || key[j] <key[u])){ //if the vertex is not in the span, and it's key is smaller, the u will be changed to j
                     u=j;
