@@ -52,18 +52,29 @@ public:
 
     void Depth(int d, vector<bool>&visited){ //DFS goes through each of the path until it reaches the end and then it moves back and visit others unlike BFS 
         visited[d] = true;
-        cout << d << " ";
+        cout << "\nInspecting " << floorNames[d] << endl;
 
-        for (auto &edge: adjList[d]){ //this goes through the vertex's neighbors and then if it's not visited, we recall the depth first search to the next vertix
+        for (auto &edge : adjList[d]) {
             int next = edge.first;
-            if (!visited[next]){
+            int danger = edge.second;
+
+            if (!visited[next]) {
+                cout << "  Intersecting with:  " << floorNames[next]
+                     << " | Path Difficulty: " << danger << endl;
+
                 Depth(next, visited);
             }
         }
     }
     void DFS(int v){
         vector<bool> visited(SIZE, false);
-        Depth(v, visited); //this is used to call the Depth function
+        Depth(v, visited);
+
+        cout << "\nDFS Traversal Order: ";
+        for (int i = 0; i < SIZE; i++){
+            if (visited[i]) cout << i << " ";
+        }
+        cout << "\n\n";
     }
     void BFS(int b){
         vector<bool> visited(SIZE, false);
