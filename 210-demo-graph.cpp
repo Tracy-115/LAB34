@@ -43,7 +43,22 @@ public:
             cout << endl;
         }
     }
-};
+
+    void Depth(int d, vector<bool>&visited){
+        visited[d] = true;
+        cout << d << " ";
+
+        for (auto &edge: adjList[d]){ //this goes through the vertex's neighbors and then if it's not visited, we recall the depth first search to the next vertix
+            int next = edge.first;
+            if (!visited[next]){
+                Depth(next, visited);
+            }
+        }
+    }
+    void DFS(int v){
+        vector<bool> visited(SIZE, false);
+        Depth(v, visited); //this is used to call the Depth function
+    }
 
 int main() {
     // Creates a vector of graph edges/weights
