@@ -129,11 +129,14 @@ public:
  
         return dist;
     }
-        void shortest(int src) { //this is the printing function
-            vector<int> dist = dijkstra(src);
-            cout << "Shortest path from " << floorNames[src] << ":\n";
-            for(int i = 0; i < dist.size(); i++)
-                cout << src << " -> " << i << " : " << dist[i] << endl;
+    void shortest(int src) { //this is the printing function
+        vector<int> dist = dijkstra(src);
+        cout << "Shortest path from " << floorNames[src] << ":\n";
+        for(int i = 0; i < dist.size(); i++)
+            cout << src << " -> " << i << " : " << dist[i] << endl;
+    }
+    void MST(){
+        
     }
 };
 
