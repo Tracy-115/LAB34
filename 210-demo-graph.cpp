@@ -150,8 +150,22 @@ public:
             }
             included[u] = true;
 
-            for (auto &edge)
+            for (auto &edge : adjList[u]) {
+                int v = edge.first;
+                int weight = edge.second;
+
+                if (!inMST[v] && weight < key[v]) { //if thee vertex is not yet in the span and it's weight is also less, parent and v is updated
+                    parent[v] = u;
+                    key[v] = weight;
+                }
+            }
         }
+        for (int i = 0; i <SIZE ; i++){
+            if (parent[i] != -1){
+                cout << "Intersection from" << parent [i] << " to " << i<< "fits " << key[i] << " people" << endl;
+            }
+        }
+
     }
 };
 
@@ -197,6 +211,8 @@ int main() {
     graph.BFS(0);
 
     graph.shortest(0);
+
+    graph.MST();
 
     return 0;
 }
