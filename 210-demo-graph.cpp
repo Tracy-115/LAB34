@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <climits>
+#include <queue>
 using namespace std;
 //I decided that I wanted to create an emergency exit for a building with 12 floors
 //Dijkstra's Algorithm: Useful for finding the shortest path from a single source to all other nodes in a graph with non-negative weights. It uses a priority queue to greedily select the next node with the smallest distance, updating its neighbors' distances.
@@ -104,14 +105,7 @@ public:
     }
 
     vector<int> dijkstra(int src) {
-
-        int V = adj.size();
-        vector<int> dist(V, max);
-
-        // Min-heap (priority queue) storing pairs of (distance, node)
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-
-        vector<int> dist(V, INT_MAX);
+        vector<int> dist(SIZE, INT_MAX);
 
         priority_queue<Pair, vector<Pair>, greater<Pair>> pq;
         pq.push({0, src});
@@ -122,9 +116,24 @@ public:
             pq.pop();
 
             if(d > dist[u]) continue;
-
             for(auto &neighbor : adjList[u]) {
-
+                int v = neighbor.first;
+                int weight = neighbor.second;
+                if(dist[u] + weight < dist[v]) {
+                    dist[v] = dist[u] + weight;
+                    pq.push({dist[v], v});
+                }
+            }
+        }
+ 
+        return dist;
+    }
+        void shortest(int src) {
+            vector<int> dist = dijkstra(src);
+            cout << "Shortest path from " << floorNames[src] << ":\n";
+            for(int i = 0; i < dist.size(); i++)
+                cout << src << " -> " << i << " : " << dist[i] << endl;
+    }
 };
 
 int main() {
@@ -167,6 +176,8 @@ int main() {
     cout << "Tracing emergency exits starting from floor 0 or the Ground Floor [BFS]" << endl;
     cout << "To know nearest exit." << endl;
     graph.BFS(0);
+
+    graphs.shortest(0);
 
     return 0;
 }
