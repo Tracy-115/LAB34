@@ -199,29 +199,45 @@ int main() {
     // Creates graph
     Graph graph(edges);
 
-    // Prints adjacency list representation of graph
-    graph.printGraph();
-    //both of these are going to start from vertex 0
-    cout << "Tracing emergency exits starting from floor 0 or the Ground Floor [DFS]" << endl;
-    cout << "To be aware of the paths leading from a certain floor" << endl;
-    graph.DFS(0);
-    cout << endl;
-    cout << "Tracing emergency exits starting from floor 0 or the Ground Floor [BFS]" << endl;
-    cout << "To know nearest exit." << endl;
-    graph.BFS(0);
+    int choice = 0;
+    while (choice !=  5){
+        cout << "[0] Show the full map of the building" << endl;
+        cout << "[1] Show the neighboring floors (BFS)" << endl;
+        cout << "[2] Show any paths from the intersections (DFS)" << endl;
+        cout << "[3] Show the shortest paths" << endl;
+        cout << "[4] Show minimum spanning tree" << endl;
+        cout << "[5] Quit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
 
-    graph.shortest(0);
-
-    graph.MST();
-    int choice;
-    cout << "[0] Show the full map of the building" << endl;
-    cout << "[1] Show the neighboring floors (BFS)" << endl;
-    cout << "[2] Show any paths from the intersections (DFS)" << endl;
-    cout << "[3] Show the shortest paths" << endl;
-    cout << "[4] Show minimum spanning tree" << endl;
-    cout << "[5] Quit" << endl;
-    cout << "Enter your choice: ";
-    cin >> choice;
-
+        if (choice == 0){
+            graph.printGraph();
+        }
+        else if (choice == 1){
+            cout << "Tracing emergency exits starting from floor 0 or the Ground Floor [BFS]" << endl;
+            cout << "To know nearest exit." << endl;
+            graph.BFS(0);
+            cout << endl;
+        }
+        else if (choice == 2){
+            cout << "Tracing emergency exits starting from floor 0 or the Ground Floor [DFS]" << endl;
+            cout << "To be aware of the paths leading from a certain floor" << endl;
+            graph.DFS(0);
+            cout << endl;
+        }
+        else if (choice == 3){
+            cout << "Printing the shortest routs:" << endl;
+            graph.shortest(0);
+        }
+        else if (choice == 4){
+            cout << "The minimum spanning tree:" << endl;
+            graph.MST();
+        }
+        else{
+            cout << "Ended the find :)" << endl;
+            return 0;
+        }
+    }
+    
     return 0;
 }
