@@ -77,21 +77,31 @@ public:
         cout << "\n\n";
     }
     void BFS(int b){
+        int f = 0; 
         vector<bool> visited(SIZE, false);
         vector<int>v; //I created this so that we know how many verticies we have to go through
         visited[b] = true; //after going through each of the vertex, it is marked true so that you won't repeat the visit
         v.push_back(b);
-        while (!v.empty()) {
-            int l = v.front();
-            v.erase(v.begin());
-            cout << l << " ";
-            for (auto &edge : adjList[l]) {
+        while (f < v.size()) {
+            int curr = v[f];
+            f++;
+            cout << "Checking " << floorNames[curr] << "\n";
+
+            for (auto &edge : adjList[curr]) {
                 int next = edge.first;
+                int i = edge.second;
+
                 if (!visited[next]) {
                     visited[next] = true;
                     v.push_back(next);
+
+                    cout << "  Next reachable floor: "
+                         << floorNames[next]
+                         << " , Difficulty: " << i << "\n";
                 }
             }
+
+            cout << endl;
         }
     }
 };
@@ -129,6 +139,7 @@ int main() {
     // Prints adjacency list representation of graph
     graph.printGraph();
     //both of these are going to start from vertex 0
+    cout << "Tracing emergency exits starting from floor 0 or the Ground Floor [DFS]" << endl;
     graph.DFS(0);
     cout << endl;
     graph.BFS(0);
