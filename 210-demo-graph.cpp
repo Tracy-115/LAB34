@@ -106,11 +106,12 @@ public:
 
     vector<int> dijkstra(int src) {
         vector<int> dist(SIZE, INT_MAX);
+        dist[src] = 0; //the distance is initially 0
 
         priority_queue<Pair, vector<Pair>, greater<Pair>> pq;
         pq.push({0, src});
 
-        while(!pq.empty()) {
+        while(!pq.empty()) { //this is a loop to take out the vertex with the least distance
             int u = pq.top().second;
             int d = pq.top().first;
             pq.pop();
@@ -119,7 +120,7 @@ public:
             for(auto &neighbor : adjList[u]) {
                 int v = neighbor.first;
                 int weight = neighbor.second;
-                if(dist[u] + weight < dist[v]) {
+                if(dist[u] + weight < dist[v]) { //this is to compare the weight
                     dist[v] = dist[u] + weight;
                     pq.push({dist[v], v});
                 }
@@ -128,7 +129,7 @@ public:
  
         return dist;
     }
-        void shortest(int src) {
+        void shortest(int src) { //this is the printing function
             vector<int> dist = dijkstra(src);
             cout << "Shortest path from " << floorNames[src] << ":\n";
             for(int i = 0; i < dist.size(); i++)
@@ -177,7 +178,7 @@ int main() {
     cout << "To know nearest exit." << endl;
     graph.BFS(0);
 
-    graphs.shortest(0);
+    graph.shortest(0);
 
     return 0;
 }
