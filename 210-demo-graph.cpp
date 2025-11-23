@@ -44,7 +44,7 @@ public:
             cout << floorNames[i] << " connects to:\n";
 
             for (auto &p : adjList[i]) {
-                cout << "  ->" << floorNames[p.first] << " | Stair Difficulty: " << p.second << endl;
+                cout << "  ->" << floorNames[p.first] << " , Difficulty: " << p.second << endl;
             }//the weights became the difficulty, and the vertex are the floors
             cout << endl;
         }
@@ -60,7 +60,7 @@ public:
 
             if (!visited[next]) {
                 cout << "  Intersecting with:  " << floorNames[next]
-                     << " | Path Difficulty: " << danger << endl;
+                     << " , Difficulty: " << danger << endl;
 
                 Depth(next, visited);
             }
@@ -69,12 +69,6 @@ public:
     void DFS(int v){
         vector<bool> visited(SIZE, false);
         Depth(v, visited);
-
-        cout << "\nDFS Traversal Order: ";
-        for (int i = 0; i < SIZE; i++){
-            if (visited[i]) cout << i << " ";
-        }
-        cout << "\n\n";
     }
     void BFS(int b){
         int f = 0; 
@@ -85,7 +79,7 @@ public:
         while (f < v.size()) {
             int curr = v[f];
             f++;
-            cout << "Checking " << floorNames[curr] << "\n";
+            cout << "Closest floor #" << floorNames[curr] << "\n";
 
             for (auto &edge : adjList[curr]) {
                 int next = edge.first;
@@ -140,8 +134,11 @@ int main() {
     graph.printGraph();
     //both of these are going to start from vertex 0
     cout << "Tracing emergency exits starting from floor 0 or the Ground Floor [DFS]" << endl;
+    cout << "To be aware of the paths leading from a certain floor" << endl;
     graph.DFS(0);
     cout << endl;
+    cout << "Tracing emergency exits starting from floor 0 or the Ground Floor [BFS]" << endl;
+    cout << "To know nearest exit." << endl;
     graph.BFS(0);
 
     return 0;
