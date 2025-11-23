@@ -66,7 +66,7 @@ public:
         v.push_back(b);
         while (!v.empty()) {
             int l = b.front();
-            v.erase();
+            v.erase(v.begin());
             cout << l << " ";
             for (auto &edge : adjList[l]) {
                 int next = edge.first;
@@ -91,6 +91,9 @@ int main() {
 
     // Prints adjacency list representation of graph
     graph.printGraph();
+    //both of these are going to start from vertex 0
+    graph.DFS(0);
+    graph.BFS(0);
 
     return 0;
 }
