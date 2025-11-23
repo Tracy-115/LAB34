@@ -44,7 +44,7 @@ public:
         }
     }
 
-    void Depth(int d, vector<bool>&visited){
+    void Depth(int d, vector<bool>&visited){ //DFS goes through each of the path until it reaches the end and then it moves back and visit others unlike BFS 
         visited[d] = true;
         cout << d << " ";
 
@@ -59,6 +59,25 @@ public:
         vector<bool> visited(SIZE, false);
         Depth(v, visited); //this is used to call the Depth function
     }
+    void BFS(int b){
+        vector<bool> visited(SIZE, false);
+        vector<int>v; //I created this so that we know how many verticies we have to go through
+        visited[b] = true; //after going through each of the vertex, it is marked true so that you won't repeat the visit
+        v.push_back(b);
+        while (!v.empty()) {
+            int l = b.front();
+            v.erase();
+            cout << l << " ";
+            for (auto &edge : adjList[l]) {
+                int next = edge.first;
+                if (!visited[next]) {
+                    visited[next] = true;
+                    v.push_back(next);
+                }
+            }
+        }
+    }
+};
 
 int main() {
     // Creates a vector of graph edges/weights
